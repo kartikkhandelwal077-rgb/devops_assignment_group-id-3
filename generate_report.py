@@ -257,9 +257,45 @@ def generate_pdf(interval="weekly"):
     story.append(t)
     story.append(Spacer(1, 15))
     
-    story.append(Paragraph("2. Project Visuals", section_style))
+    story.append(Paragraph("2. Visual Trends & Volume", section_style))
     chart = create_charts(students, timeline_activity, interval)
     story.append(chart)
+    
+    story.append(Spacer(1, 15))
+    interval_cap = interval.capitalize()
+    story.append(Paragraph(f"3. Detailed Commit Logs ({interval_cap})", section_style))
+    
+    for author in sorted(students.keys()):
+        logs = student_logs.get(author, [])
+        if not logs:
+            continue
+        
+        story.append(Paragraph(f"<b><i>Student: {html.escape(author)} — {len(logs)} commit(s)</i></b>", sub_section_style))
+        
+        log_table_data = [["Date", "Hash", "Commit Message"]]
+        for log in logs:
+            date_str, sha, msg = log
+            log_table_data.append([
+                html.escape(date_str), 
+                html.escape(sha), 
+                Paragraph(html.escape(msg), msg_style)
+            ])
+            
+        log_t = Table(log_table_data, colWidths=[70, 60, 390])
+        log_t.setStyle(TableStyle([
+            ('BACKGROUND', (0,0), (-1,0), colors.HexColor("#475569")),
+            ('TEXTCOLOR', (0,0), (-1,0), colors.whitesmoke),
+            ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+            ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0,0), (-1,0), 9),
+            ('BOTTOMPADDING', (0,0), (-1,0), 6),
+            ('TOPPADDING', (0,0), (-1,0), 6),
+            ('BACKGROUND', (0,1), (-1,-1), colors.HexColor("#F8FAFC")),
+            ('GRID', (0,0), (-1,-1), 1, colors.HexColor("#E2E8F0")),
+            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+        ]))
+        story.append(log_t)
+        story.append(Spacer(1, 10))
     
     doc.build(story)
 
