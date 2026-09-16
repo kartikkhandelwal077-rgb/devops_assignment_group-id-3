@@ -32,16 +32,18 @@ jobs:
         run: |
           pip install reportlab matplotlib
 
-      - name: Generate Weekly & Monthly PDF Reports
+      - name: Generate Weekly, Monthly & Final PDF Reports
         run: |
           python generate_report.py weekly
           python generate_report.py monthly
+          python generate_report.py final
 
       - name: Move PDF to Weekly Reports Directory & Commit to Repository
         run: |
           mkdir -p weekly_reports
           mv *_Weekly_Progress_Report_Form-3_*.pdf weekly_reports/ 2>/dev/null || true
           mv *_Monthly_Progress_Report_Form-3_*.pdf weekly_reports/ 2>/dev/null || true
+          mv *_Final_Report_*.pdf weekly_reports/ 2>/dev/null || true
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add weekly_reports/
