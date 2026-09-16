@@ -24,3 +24,14 @@ DevOpsAssignment
 - **`Images/`**: Diagrams, screenshots, and visual documentation.
 - **`Assignment/`**: Main assignment sub-folder for code and report submissions.
 - **`WeeklyTask/`**: Weekly task files, updates, and progress logs.
+
+## Automated Weekly Progress Report
+
+This repository includes an automated Form-3 weekly progress reporting system using Python and GitHub Actions.
+
+### Generate Report Locally
+
+Install the required dependencies:
+
+```bash
+python -m pip install reportlab matplotlib
