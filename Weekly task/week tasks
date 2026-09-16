@@ -1,1 +1,11 @@
+# Weekly Task Log
 
+## Week 1
+- Initial repository setup and folder structure creation based on mandatory guidelines.
+
+## Week 2
+- Addition of DevOps learning materials, JUnit guides, Selenium notes, and Postman cheatsheets.
+
+## Week 3
+- Integration of automated Form-3 Weekly Progress Reporting using Python (`reportlab`, `matplotlib`) and GitHub Actions.
+- Testing local PDF report generation and verifying scheduled weekly workflow execution.
